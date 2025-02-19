@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.writing-vertical {
+  writing-mode: vertical-lr;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --primary: rgb(241 90 54);
+  --primary-light: rgb(244, 129, 102);
+  --primary-dark: rgb(228, 57, 16);
+  --primary-content: rgb(25, 9, 3);
+  --secondary: rgb(183, 38, 241);
+  --secondary-light: rgb(200, 102, 244);
+  --secondary-dark: rgb(162, 16, 228);
+  --secondary-content: rgb(255, 255, 255);
+  --secondary-transparent: rgba(183, 38, 241, 0.3);
+}
+
+@layer components {
+  .bg-mask-pattern {
+    background-image: radial-gradient(transparent 1px, var(--primary-content) 3px);
+    background-size: 5px 5px;
+    backdrop-filter: blur(10px);
+    mask: linear-gradient(var(--secondary-light) 80%, rgba(99, 102, 241, 0) 100%);
+    opacity: 1;
+  }
+  .bg-main-element {
+    background: radial-gradient(
+      farthest-corner at 40px 40px,
+      var(--secondary-transparent) 0%,
+      var(--primary-content) 30%
+    );
+    background-size: 100% 100vh;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
