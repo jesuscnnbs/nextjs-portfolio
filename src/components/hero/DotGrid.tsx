@@ -1,9 +1,23 @@
+import React from "react";
 import anime from "animejs";
 
-const GRID_WIDTH = 16;
-const GRID_HEIGHT = 16;
+const GRID_WIDTH = 17;
+const GRID_HEIGHT = 17;
 
 const DotGrid = () => {
+  React.useLayoutEffect(() => {
+    // Calculate the index for i=8, j=8
+    const targetIndex = 8 * GRID_WIDTH + 8;
+    // Find the element with that index
+    const element = document.querySelector(`[data-index="${targetIndex}"]`);
+    if (element) {
+      element.dispatchEvent(new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }));
+    }
+  }, []);
+
   const handleDotClick = (e: any) => {
     anime({
       targets: ".dot-point",

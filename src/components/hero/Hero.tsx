@@ -13,12 +13,14 @@ const Hero = () => {
             </h1>
           </Reveal>
           <Reveal>
-            <h2 className="pointer-events-auto my-2 text-xl sm:text-2xl text-zinc-300 md:my-4 md:text-4xl">
+            <div className="pointer-events-none my-4">
+            <h2 className="inline pointer-events-auto text-xl sm:text-2xl text-zinc-300 md:my-4 md:text-4xl">
               I'm {" "}
               <span className="font-semibold text-secondary-light">
                 Jesús
               </span>
             </h2>
+            </div>
           </Reveal>
           <Reveal>
             <p className="pointer-events-auto leading-relaxed md:leading-relaxed max-w-xl text-sm text-zinc-300 md:text-base">

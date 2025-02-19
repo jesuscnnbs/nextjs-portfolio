@@ -13,34 +13,29 @@ export const About = () => {
           <Reveal>
             <p className="leading-relaxed text-zinc-300">
               <span className="bg-secondary-dark text-white py-2 px-3 font-bold mr-1 float-left text-2xl">
-                H
+                I
               </span>
-              ey! I&apos;m Bob, if you haven&apos;t already gathered that by
-              now. I&apos;m a painter turned software engineer from Daytona,
-              Florida. I specialize in the backend, primarily Node and Rust, but
-              love building with whatever tools are right for the job.
+              &apos;m Jesús, a web developer from Almería, Andalucía, Spain. I specialize in frontend development,
+              primarily with React, Next.js and Tailwind CSS.
             </p>
           </Reveal>
           <Reveal>
             <p className="leading-relaxed text-zinc-300">
-              I currently work for Google on Google Photos. I also toss in my ¢2
-              with the design systems teams from time to time (once an artist,
-              always an artist, amirite?).
+              I currently work as Freelance Developer. At the moment enjoying
+              by making very cool designs and building them into real products.
             </p>
           </Reveal>
           <Reveal>
             <p className="leading-relaxed text-zinc-300">
-              Outside of work, I still love to paint. Any given Sunday
-              you&apos;ll find me scribbling some happy clouds with my son ☁️ I
-              even teach courses online if you&apos;re looking to learn!
+              Outside of work, I love spending time with my family, friends and
+              my dog. Another of my passions is to play handball, I&apos;m a
+              member of a team called Bahía de Almería.
             </p>
           </Reveal>
           <Reveal>
             <p className="leading-relaxed text-zinc-300">
-              I&apos;m passively looking for new positions where I can merge my
-              love for code with my love for the canvas. If you think
-              you&apos;ve got an opening that I might like, let&apos;s connect
-              🔗
+              I&apos;m actively looking for new positions where I can merge my
+              love for code with my passion for cool designs.
             </p>
           </Reveal>
           <Reveal>
