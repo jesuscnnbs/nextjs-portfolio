@@ -1,7 +1,7 @@
 import anime from "animejs";
 
-const GRID_WIDTH = 25;
-const GRID_HEIGHT = 20;
+const GRID_WIDTH = 16;
+const GRID_HEIGHT = 16;
 
 const DotGrid = () => {
   const handleDotClick = (e: any) => {
@@ -12,7 +12,11 @@ const DotGrid = () => {
         { value: 1, easing: "easeInOutQuad", duration: 500 },
       ],
       translateY: [
-        { value: -15, easing: "easeOutSine", duration: 250 },
+        { value: -8, easing: "easeOutSine", duration: 250 },
+        { value: 1, easing: "easeInOutQuad", duration: 500 },
+      ],
+      translateX: [
+        { value: -8, easing: "easeOutSine", duration: 250 },
         { value: 1, easing: "easeInOutQuad", duration: 500 },
       ],
       opacity: [
@@ -33,12 +37,12 @@ const DotGrid = () => {
     for (let j = 0; j < GRID_HEIGHT; j++) {
       dots.push(
         <div
-          className="group cursor-crosshair rounded-full p-2 transition-colors hover:bg-zinc-600"
+          className="group cursor-crosshair rounded-none p-2 transition-colors hover:bg-zinc-600"
           data-index={index}
           key={`${i}-${j}`}
         >
           <div
-            className="dot-point h-2 w-2 rounded-full bg-gradient-to-b from-zinc-700 to-zinc-400 opacity-50 group-hover:from-indigo-500 group-hover:to-white"
+            className="dot-point size-1 sm:size-2 rounded-none bg-gradient-to-tl from-secondary-dark to-secondary-light opacity-50 group-hover:from-primary-dark group-hover:to-primary-light"
             data-index={index}
           />
         </div>
@@ -51,7 +55,7 @@ const DotGrid = () => {
     <div
       onClick={handleDotClick}
       style={{ gridTemplateColumns: `repeat(${GRID_WIDTH}, 1fr)` }}
-      className="absolute right-0 top-[50%] z-0 grid max-w-[75%] -translate-y-[50%]"
+      className="absolute right-[10%] top-[50%] z-0 grid max-w-[75%] -translate-y-[50%] rotate-45"
     >
       {dots}
     </div>
