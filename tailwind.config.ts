@@ -10,16 +10,19 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: 'rgb(228, 57, 16)',
-          light: 'rgb(244, 129, 102)',
-          dark: 'rgb(228, 57, 16)',
-          content: 'rgb(37, 9, 3)',
+          DEFAULT: 'var(--primary)',
+          light: 'var(--primary-light)',
+          dark: 'var(--primary-dark)',
+          content: 'var(--primary-content)',
+          transparent: 'var(--primary-transparent)',
         },
         secondary: {
-          DEFAULT: 'rgb(183, 38, 241)',
-          light: 'rgb(200, 102, 244)',
-          dark: 'rgb(162, 16, 228)',
-          content: 'rgb(255, 255, 255)',
+          DEFAULT: 'var(--secondary)',
+          light: 'var(--secondary-light)',
+          dark: 'var(--secondary-dark)',
+          darkest: 'var(--secondary-darkest)',
+          content: 'var(--secondary-content)',
+          transparent: 'var(--secondary-transparent)',
         },
       },
       backgroundImage: {
