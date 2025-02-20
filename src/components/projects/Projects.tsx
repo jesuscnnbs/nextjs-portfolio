@@ -4,7 +4,7 @@ import { Project } from "./Project";
 
 export const Projects = () => {
   return (
-    <section className="section-wrapper" id="projects">
+    <section className="section-wrapper min-h-[60vh]" id="projects">
       <SectionHeader title="Projects" dir="r" />
 
       <div className="grid gap-12 grid-cols-1 md:grid-cols-2">
@@ -24,30 +24,20 @@ const projects = [
     projectLink: "https://sm-medusa-storefront.vercel.app/es",
     tech: ["Medusajs Ecommerce", "Nextjs", "Tailwind", "Typescript", "Stripe", "Heroku", "Vercel"],
     description:
-      "A real-time coaching app for students learning to paint. This app is my baby, designed and built on my own.",
+      "An ecommerce for a burger restaurant in Almería, with the best reviews in town.",
     modalContent: (
       <>
         <p>
-          Pain.app is a real-time coaching app for students learning to paint.
-          This app is my baby, designed and built on my own.
+        An ecommerce for a burger restaurant in Almería, with the best reviews in town.
         </p>
         <p>
-          The tech stack is based on top of Flutter for the mobile app,
-          connected to a Python & FastAPI backend, with data stored in Postgres,
-          deployed on Heroku.
+          It is developed with Medusa, a headless ecommerce platform, and Nextjs, Tailwind and Typescript.
         </p>
         <p>
-          Because this isn&apos;t real, here&apos;s some gibberish to fill space{" "}
-          {":)"}
+          The payment is made with Stripe and the database is Postgres.
         </p>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur
-          quia officia odio nulla consectetur aperiam ad tempora magni magnam
-          nesciunt.
-        </p>
-        <p>
-          Fuga id sapiente facere ipsa eius exercitationem officiis deleniti,
-          rerum dolorum. Deserunt soluta modi culpa animi.
+          The front is stored in Vercel and the back in Heroku.
         </p>
       </>
     ),

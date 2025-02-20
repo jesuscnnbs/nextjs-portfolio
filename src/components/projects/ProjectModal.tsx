@@ -58,7 +58,7 @@ export const ProjectModal = ({
         />
         <div className="p-8">
           <h4 className="text-3xl font-bold mb-2">{title}</h4>
-          <div className="flex flex-wrap gap-2 text-sm text-indigo-300">
+          <div className="flex flex-wrap gap-2 text-sm text-secondary-light">
             {tech.join(" - ")}
           </div>
 
@@ -68,7 +68,7 @@ export const ProjectModal = ({
 
           <div>
             <p className="font-bold mb-2 text-xl">
-              Project Links<span className="text-indigo-500">.</span>
+              Project Links<span className="text-secondary-light">.</span>
             </p>
             <div className="flex items-center gap-4 text-sm">
               <Link

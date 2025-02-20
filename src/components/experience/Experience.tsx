@@ -3,7 +3,7 @@ import { ExperienceItem } from "./ExperienceItem";
 
 export const Experience = () => {
   return (
-    <section className="section-wrapper" id="experience">
+    <section className="section-wrapper min-h-[60vh]" id="experience">
       <SectionHeader title="Experience" dir="l" />
       {experience.map((item) => (
         <ExperienceItem key={item.title} {...item} />
@@ -72,7 +72,7 @@ const experience = [
     time: "2020 - 2021",
     location: "Valencia",
     description:
-      "Mid Front end Developer for Snorkel Spain S.L. I was responsible for the development of the frontend of the company's new AI product",
-    tech: ["React", "Nextjs", "Tailwind", "Git", "GitHub", "Laravel"],
+      "Junior Front end Developer for Rithmi, a company that were creating non invasive medical devices to detect heart arrhythmia.",
+    tech: ["React Native", "Expo", "React", "Node", "AWS", "Git", "GitHub", "Figma", "Docker", "iOS", "Android"],
   },
 ];

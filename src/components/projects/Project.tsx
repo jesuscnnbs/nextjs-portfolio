@@ -63,8 +63,8 @@ export const Project = ({
             src={imgSrc}
             alt={`An image of the ${title} project.`}
             style={{
-              width: hovered ? "90%" : "85%",
-              rotate: hovered ? "2deg" : "0deg",
+              width: hovered ? "95%" : "90%",
+              rotate: hovered ? "5deg" : "0deg",
             }}
             className="w-[85%] absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/4 transition-all rounded"
           />
@@ -78,16 +78,16 @@ export const Project = ({
               <div className="w-full h-[1px] bg-zinc-600" />
 
               <Link href={code} target="_blank" rel="nofollow">
-                <AiFillGithub className="text-xl text-zinc-300 hover:text-indigo-300 transition-colors" />
+                <AiFillGithub className="text-xl text-zinc-300 hover:text-secondary transition-colors" />
               </Link>
 
               <Link href={projectLink} target="_blank" rel="nofollow">
-                <AiOutlineExport className="text-xl text-zinc-300 hover:text-indigo-300 transition-colors" />
+                <AiOutlineExport className="text-xl text-zinc-300 hover:text-secondary transition-colors" />
               </Link>
             </div>
           </Reveal>
           <Reveal>
-            <div className="flex flex-wrap gap-4 text-sm text-indigo-300 my-2">
+            <div className="flex flex-wrap gap-4 text-sm text-secondary-light my-2">
               {tech.join(" - ")}
             </div>
           </Reveal>
@@ -95,7 +95,7 @@ export const Project = ({
             <p className="text-zinc-300 leading-relaxed">
               {description}{" "}
               <span
-                className="inline-block text-sm text-indigo-300 cursor-pointer"
+                className="inline-block text-sm text-primary-light cursor-pointer"
                 onClick={() => setIsOpen(true)}
               >
                 Learn more {">"}
