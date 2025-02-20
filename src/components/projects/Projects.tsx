@@ -4,7 +4,7 @@ import { Project } from "./Project";
 
 export const Projects = () => {
   return (
-    <section className="section-wrapper min-h-[60vh]" id="projects">
+    <section className="section-wrapper py-20" id="projects">
       <SectionHeader title="Projects" dir="r" />
 
       <div className="grid gap-12 grid-cols-1 md:grid-cols-2">

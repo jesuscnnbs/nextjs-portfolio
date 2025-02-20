@@ -57,7 +57,7 @@ export const Project = ({
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           onClick={() => setIsOpen(true)}
-          className="w-full aspect-video bg-zinc-700 cursor-pointer relative rounded-lg overflow-hidden"
+          className="w-full aspect-video bg-zinc-700 cursor-pointer relative rounded-none overflow-hidden"
         >
           <img
             src={imgSrc}
@@ -66,7 +66,7 @@ export const Project = ({
               width: hovered ? "95%" : "90%",
               rotate: hovered ? "5deg" : "0deg",
             }}
-            className="w-[85%] absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/4 transition-all rounded"
+            className="w-[85%] absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/4 transition-all rounded-none"
           />
         </div>
         <div className="mt-6">

@@ -1,12 +1,11 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, PropsWithChildren } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-interface Props {
+interface Props extends PropsWithChildren {
   selected: string;
   setSelected: Dispatch<SetStateAction<string>>;
   href: string;
-  children: string;
   value: string;
 }
 

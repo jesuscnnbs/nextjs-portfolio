@@ -6,7 +6,7 @@ import { Stats } from "./Stats";
 
 export const About = () => {
   return (
-    <section id="about" className="section-wrapper min-h-[60vh]">
+    <section id="about" className="section-wrapper py-20">
       <SectionHeader title="About" dir="l" />
       <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8">
         <div className="space-y-4">

@@ -3,7 +3,7 @@ import { ExperienceItem } from "./ExperienceItem";
 
 export const Experience = () => {
   return (
-    <section className="section-wrapper min-h-[60vh]" id="experience">
+    <section className="section-wrapper py-20" id="experience">
       <SectionHeader title="Experience" dir="l" />
       {experience.map((item) => (
         <ExperienceItem key={item.title} {...item} />
