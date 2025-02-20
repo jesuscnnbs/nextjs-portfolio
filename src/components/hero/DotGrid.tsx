@@ -1,14 +1,13 @@
 import React from "react";
 import anime from "animejs";
+import { useTimeout } from "@/hooks/useTimeout";
 
 const GRID_WIDTH = 17;
 const GRID_HEIGHT = 17;
 
 const DotGrid = () => {
-  React.useLayoutEffect(() => {
-    // Calculate the index for i=8, j=8
+  const triggerInitialAnimation = React.useCallback(() => {
     const targetIndex = 8 * GRID_WIDTH + 8;
-    // Find the element with that index
     const element = document.querySelector(`[data-index="${targetIndex}"]`);
     if (element) {
       element.dispatchEvent(new MouseEvent('click', {
@@ -17,6 +16,8 @@ const DotGrid = () => {
       }));
     }
   }, []);
+
+  useTimeout(triggerInitialAnimation, 800);
 
   const handleDotClick = (e: any) => {
     anime({

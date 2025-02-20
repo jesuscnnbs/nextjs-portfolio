@@ -24,12 +24,12 @@ export const Reveal = ({ children, width = "w-content" }: RevealProps) => {
     <div ref={ref} className={`relative overflow-hidden ${width}`}>
       <motion.div
         variants={{
-          hidden: { opacity: 0, filter: "blur(5px)" },
-          visible: { opacity: 1, filter: "blur(0px)" },
+          hidden: { opacity: 0, y: 75 },
+          visible: { opacity: 1, y: 0 },
         }}
         initial="hidden"
         animate={mainControls}
-        transition={{ duration: 0.6, delay: 0.35 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
       >
         {children}
       </motion.div>
