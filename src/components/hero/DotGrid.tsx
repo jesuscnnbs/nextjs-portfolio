@@ -1,9 +1,24 @@
+import React from "react";
 import anime from "animejs";
+import { useTimeout } from "@/hooks/useTimeout";
 
-const GRID_WIDTH = 16;
-const GRID_HEIGHT = 16;
+const GRID_WIDTH = 17;
+const GRID_HEIGHT = 17;
 
 const DotGrid = () => {
+  const triggerInitialAnimation = React.useCallback(() => {
+    const targetIndex = 8 * GRID_WIDTH + 8;
+    const element = document.querySelector(`[data-index="${targetIndex}"]`);
+    if (element) {
+      element.dispatchEvent(new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }));
+    }
+  }, []);
+
+  useTimeout(triggerInitialAnimation, 800);
+
   const handleDotClick = (e: any) => {
     anime({
       targets: ".dot-point",

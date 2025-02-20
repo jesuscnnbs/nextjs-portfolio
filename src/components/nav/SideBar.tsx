@@ -32,9 +32,16 @@ export const SideBar = () => {
       transition={{ duration: 0.5 }}
       className="no-scrollbar bg-secondary-darkest h-screen sticky top-0 left-0 z-20 flex flex-col items-center overflow-y-scroll"
     >
-      <span className="shrink-0 text-xl font-black leading-[1] size-8 flex items-center justify-center my-4">
-        <span className="text-4xl text-secondary-light">◆</span>
-      </span>
+      <SideBarLink
+      selected={selected}
+      setSelected={setSelected}
+      value=""
+      href="#"
+      >
+        <span className="shrink-0 text-xl font-black leading-[1] size-8 flex items-center justify-center my-4">
+          <span className="text-4xl text-secondary-light">◆</span>
+        </span>
+      </SideBarLink>
       <SideBarLink
         selected={selected}
         setSelected={setSelected}

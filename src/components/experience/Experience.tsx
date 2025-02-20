@@ -3,7 +3,7 @@ import { ExperienceItem } from "./ExperienceItem";
 
 export const Experience = () => {
   return (
-    <section className="section-wrapper" id="experience">
+    <section className="section-wrapper py-20" id="experience">
       <SectionHeader title="Experience" dir="l" />
       {experience.map((item) => (
         <ExperienceItem key={item.title} {...item} />
@@ -14,48 +14,65 @@ export const Experience = () => {
 
 const experience = [
   {
-    title: "Google",
-    position: "Software Engineer",
-    time: "2022 - Present",
-    location: "Atlanta",
+    title: "Freelance",
+    position: "Full Stack Developer",
+    time: "November 2024- Present",
+    location: "Almería",
     description:
-      "I help build and scale Google Photos. Increased throughput of our primary services by 70%. Migrated backend service from Java to Go. Also helped make it look prettier.",
+      "I help build and scale products for small businesses and startups.",
     tech: [
-      "Angular",
-      "Python",
-      "GCP",
+      "React",
+      "Nextjs",
+      "Tailwind",
       "Git",
       "GitHub",
-      "Java",
-      "Golang",
-      "K8s",
+      "Figma",
+      "Vercel",
+      "Stripe",
+      "AWS",
+      "Docker",
+      "PostgreSQL",
     ],
   },
   {
-    title: "Facebook",
-    position: "Software Engineer",
-    time: "2020 - 2022",
-    location: "San Francisco",
+    title: "Snorkel Spain S.L.",
+    position: "Front end Developer",
+    time: "2024",
+    location: "Almería (Remote)",
     description:
-      "Senior Full Stack Engineer for Facebook Marketplace. Created a service from scratch to handle new listings. Also played some ping pong. It was fun.",
-    tech: ["React", "Node", "PHP", "GraphQL", "Presto", "Cassandra"],
+      "Mid Front end Developer for Snorkel Spain S.L. I was responsible for the development of the frontend of the company's new AI product",
+    tech: ["React", "Nextjs", "Tailwind", "Git", "GitHub", "Laravel"],
   },
   {
-    title: "Amazon",
-    position: "Software Engineer",
-    time: "2016 - 2020",
-    location: "Seattle",
+    title: "Alten Spain S.L.",
+    position: "Software Engineer Consultant",
+    time: "2022 - 2023",
+    location: "Valencia (Remote)",
     description:
-      "Data Engineer for store front. Built data pipelines with Spark and Airflow. Saw Bezos one time. He said he liked my paintings. I said I liked his hair.",
+      "Participated in the development of some projects for the company's clients using Vue, Node, Python and AWS",
     tech: [
-      "Java",
+      "React Native",
+      "Vue",
+      "Node",
       "Python",
-      "S3",
-      "RDS",
-      "Redshift",
-      "PySpark",
-      "HDFS",
-      "Apache Airflow",
+      "AWS",
+      "Docker",
+      "PostgreSQL",
+      "Git",
+      "GitHub",
+      "Figma",
+      "Docker",
+      "Java",
+      "Spring",
     ],
+  },
+  {
+    title: "Rithmi",
+    position: "Software Engineer",
+    time: "2020 - 2021",
+    location: "Valencia",
+    description:
+      "Junior Front end Developer for Rithmi, a company that were creating non invasive medical devices to detect heart arrhythmia.",
+    tech: ["React Native", "Expo", "React", "Node", "AWS", "Git", "GitHub", "Figma", "Docker", "iOS", "Android"],
   },
 ];
