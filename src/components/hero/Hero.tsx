@@ -9,7 +9,7 @@ const Hero = () => {
         <div className="pointer-events-none relative z-10">
           <Reveal>
             <h1 className="inline bg-gradient-to-r from-primary-light to-secondary bg-clip-text pointer-events-auto text-4xl sm:text-6xl font-black text-transparent md:text-8xl">
-              Front-end{" "}Developer<span className="text-4xl">◆</span>
+              Front-end{" "}Developer<span className="text-xl sm:text-4xl">◆</span>
             </h1>
           </Reveal>
           <Reveal>
