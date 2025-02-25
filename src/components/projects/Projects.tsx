@@ -46,7 +46,7 @@ const projects = [
     title: "Innsomnia web 2020",
     imgSrc: "project-imgs/innsomnia2020.jpg",
     code: "https://www.github.com",
-    projectLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    projectLink: "https://web.archive.org/web/20200527175228/https://innsomnia.es/es/",
     tech: ["Laravel", "CSS", "HTML", "Blade", "Nova", "Hubspot"],
     description:
       "A web for a company that needs to manage their clients and publish their products and services",
