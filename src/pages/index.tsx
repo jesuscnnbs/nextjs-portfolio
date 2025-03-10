@@ -15,10 +15,10 @@ export default function Home() {
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="/" />
+        <meta property="og:url" content="https://nextjs-portfolio-six-green.vercel.app" />
         <meta property="og:title" content="Portfolio - jesuscnnbs" />
         <meta property="og:description" content="Portfolio web page for jesuscnnbs front-end developer" />
-        <meta property="og:image" content="frontend-bg.jpg" />
+        <meta property="og:image" content="https://nextjs-portfolio-six-green.vercel.app/frontend-bg.jpg" />
         
 
         <link rel="canonical" href="/" />
