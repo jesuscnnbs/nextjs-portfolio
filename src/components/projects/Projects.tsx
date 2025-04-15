@@ -18,6 +18,25 @@ export const Projects = () => {
 
 const projects = [
   {
+    title: "Yo diablo",
+    imgSrc: "project-imgs/yodiablo.jpg",
+    code: "https://github.com/jesuscnnbs",
+    projectLink: "https://yo-diablo-next-ts.vercel.app/es",
+    tech: ["Supabase", "Nextjs", "Tailwind", "Typescript"],
+    description:
+      "A web for a band that needs to publish their concerts and show their products",
+    modalContent: (
+      <>
+        <p>
+        A web for a band that needs to publish their concerts and show great
+        </p>
+        <p>
+          Developed with Nextjs, and Supabase (an open source Firebase alternative)
+        </p>
+      </>
+    ),
+  },
+  {
     title: "Santa Mónica",
     imgSrc: "project-imgs/santamonica.jpg",
     code: "https://github.com/jesuscnnbs/sm-medusa-storefront",
