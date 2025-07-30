@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <header className="h-[72px] px-4 flex items-center justify-between sticky top-0 z-20 bg-mask-pattern">
       <MyLinks />
-      <OutlineButton onClick={() => window.open("/CurriculumVitaeJesusGarcia.pdf")} className="h-8 bg-secondary-content text-primary-content px-4 text-sm">
+      <OutlineButton onClick={() => window.open("/Curriculum_Vitae_EN.pdf")} className="h-8 bg-secondary-content text-primary-content px-4 text-sm">
         My Resume
       </OutlineButton>
     </header>
