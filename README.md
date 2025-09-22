@@ -61,3 +61,27 @@ As noted, styling is done using [Tailwind CSS](https://tailwindcss.com/).
 Open up the `tailwind.config.js/ts` file to add to your configuration. For this project, we've left this as an empty template.
 
 The color palette for this project is made up of the tailwind `indigo` palette for primary colors, the `zinc` palette for neutral colors, and a few blacks/whites/other utility colors here and there. If you'd like to update these palettes, you could do a find and replace throughout the repository, for instance changing all instances of `indigo` to `red`.
+
+## Interactive Dot Grid Animation
+
+The hero section features an interactive dot grid animation (`src/components/hero/DotGrid.tsx`) that creates expanding wave patterns when clicked. The animation uses a mathematical approach combining different distance calculations:
+
+### Distance Calculation Methods
+
+- **Chebyshev Distance**: `max(|Δx|, |Δy|)` - Creates sharp diamond wave patterns
+- **Euclidean Distance**: `√(Δx² + Δy²)` - Creates circular wave patterns  
+- **Blended Distance**: Weighted combination for rounded diamond effects
+
+### Current Implementation
+
+The grid uses a blended approach: `80% Chebyshev + 20% Euclidean` to create rounded diamond wave expansions. This creates a visually appealing compromise between the sharp edges of pure diamond patterns and the smoothness of circular patterns.
+
+### Customization
+
+To adjust the wave pattern shape in `DotGrid.tsx`:
+- **More rounded**: Increase Euclidean weight (e.g., 50% each)
+- **Sharper diamond**: Increase Chebyshev weight (e.g., 90% Chebyshev, 10% Euclidean)
+- **Perfect circle**: Use 100% Euclidean distance
+- **Perfect diamond**: Use 100% Chebyshev distance
+
+The grid is rotated 45 degrees, so diamond patterns appear as visual diamonds, while the mathematical calculations work in the grid's coordinate system.

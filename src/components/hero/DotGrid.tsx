@@ -20,6 +20,10 @@ const DotGrid = () => {
   useTimeout(triggerInitialAnimation, 800);
 
   const handleDotClick = (e: any) => {
+    const clickedIndex = parseInt(e.target.dataset.index);
+    const clickedRow = Math.floor(clickedIndex / GRID_WIDTH);
+    const clickedCol = clickedIndex % GRID_WIDTH;
+
     anime({
       targets: ".dot-point",
       scale: [
@@ -38,10 +42,24 @@ const DotGrid = () => {
         { value: 1, easing: "easeOutSine", duration: 250 },
         { value: 0.5, easing: "easeInOutQuad", duration: 500 },
       ],
-      delay: anime.stagger(100, {
-        grid: [GRID_WIDTH, GRID_HEIGHT],
-        from: e.target.dataset.index,
-      }),
+      delay: function(el: any, i: number) {
+        const row = Math.floor(i / GRID_WIDTH);
+        const col = i % GRID_WIDTH;
+        
+        // Distance calculations for wave pattern:
+        // 1. Chebyshev Distance: max(|Δx|, |Δy|) - creates sharp diamond shapes
+        // 2. Euclidean Distance: √(Δx² + Δy²) - creates circular shapes
+        // 3. Blended Distance: weighted combination for rounded diamond effect
+        const chebyshevDistance = Math.max(Math.abs(row - clickedRow), Math.abs(col - clickedCol));
+        const euclideanDistance = Math.sqrt(Math.pow(row - clickedRow, 2) + Math.pow(col - clickedCol, 2));
+        
+        // Blend: 80% diamond + 20% circle = rounded diamond
+        // Adjust weights to control corner roundness (higher euclidean = more rounded)
+        const blendedDistance = chebyshevDistance * 0.8 + euclideanDistance * 0.2;
+        
+        // Round to ensure dots at similar distances animate together
+        return Math.round(blendedDistance) * 30;
+      },
     });
   };
 
