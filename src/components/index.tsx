@@ -13,8 +13,8 @@ export const HomPage = () => {
       <SideBar />
       <main className="bg-main-element bg-cover bg-center">
         <Header />
+        <Hero />
         <div className="mx-auto max-w-5xl px-4 md:px-8 space-y-32 pb-24 overflow-hidden">
-          <Hero />
           <About />
           <Projects />
           <Experience />

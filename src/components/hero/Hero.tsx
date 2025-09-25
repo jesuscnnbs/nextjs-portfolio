@@ -4,12 +4,12 @@ import { OutlineButton } from "../buttons/OutlineButton";
 
 const Hero = () => {
   return (
-    <section className="section-wrapper text-slat-100 py-24 md:py-32">
-      <div className="relative">
-        <div className="pointer-events-none relative z-10">
+    <section className="section-wrapper text-slat-100 py-24 md:py-32 mb-32 overflow-hidden">
+      <div className="relative w-full">
+        <div className="pointer-events-none relative z-10 mx-auto max-w-5xl px-4 md:px-8">
           <Reveal>
             <h1 className="inline bg-gradient-to-r from-primary-light to-secondary bg-clip-text pointer-events-auto text-4xl sm:text-6xl font-black text-transparent md:text-8xl">
-              Front-end{" "}Developer<span className="text-xl sm:text-4xl">◆</span>
+              Web{" "}Developer<span className="text-xl sm:text-4xl">◆</span>
             </h1>
           </Reveal>
           <Reveal>
