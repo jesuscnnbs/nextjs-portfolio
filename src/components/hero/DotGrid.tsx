@@ -1,13 +1,14 @@
 import React from "react";
 import anime from "animejs";
-import { useTimeout } from "@/hooks/useTimeout";
 
 const GRID_WIDTH = 17;
 const GRID_HEIGHT = 17;
+const BASE_OPACITY = 0.35;
 
 const DotGrid = () => {
   const triggerInitialAnimation = React.useCallback(() => {
-    const targetIndex = 8 * GRID_WIDTH + 8;
+    const halfWidth = Math.floor(GRID_WIDTH / 2);
+    const targetIndex = halfWidth * GRID_WIDTH + halfWidth;
     const element = document.querySelector(`[data-index="${targetIndex}"]`);
     if (element) {
       element.dispatchEvent(new MouseEvent('click', {
@@ -17,78 +18,148 @@ const DotGrid = () => {
     }
   }, []);
 
-  useTimeout(triggerInitialAnimation, 800);
+  const slideInAnimation = React.useCallback(() => {
+    anime({
+      targets: '.dot-grid-container',
+      translateX: [50, 0],
+      translateY: [-20, 0],
+      rotate: [45, 45],
+      opacity: [0, 1],
+      easing: 'easeOutCubic',
+      duration: 800,
+      complete: () => {
+        // Trigger click animation after slide in completes
+        setTimeout(triggerInitialAnimation, 300);
+      }
+    });
+  }, [triggerInitialAnimation]);
 
-  const handleDotClick = (e: any) => {
+  // Defer initial animation until after LCP to improve performance
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      // Use requestIdleCallback to run during idle time, fallback to setTimeout
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(slideInAnimation);
+      } else {
+        setTimeout(slideInAnimation, 0);
+      }
+    }, 500); // Increased delay to avoid blocking LCP
+    
+    return () => clearTimeout(timer);
+  }, [slideInAnimation]);
+
+  const handleDotClick = React.useCallback((e: any) => {
     const clickedIndex = parseInt(e.target.dataset.index);
     const clickedRow = Math.floor(clickedIndex / GRID_WIDTH);
     const clickedCol = clickedIndex % GRID_WIDTH;
-
+    
+    // Pre-calculate intensity for all dots to avoid repeated calculations
+    const intensities = new Array(GRID_WIDTH * GRID_HEIGHT);
+    
+    for (let i = 0; i < intensities.length; i++) {
+      const currentRow = Math.floor(i / GRID_WIDTH);
+      const currentCol = i % GRID_WIDTH;
+      // Use squared distance for intensity decay
+      const distanceSquared = (currentRow - clickedRow) ** 2 + (currentCol - clickedCol) ** 2;
+      // Intensity decays with square of distance (slower falloff)
+      const intensity = Math.max(0, 1 / (1 + distanceSquared * 0.01));
+      intensities[i] = intensity;
+    }
+    
+    // Create wave animation (simple approach that works reliably)
     anime({
       targets: ".dot-point",
       scale: [
-        { value: 1.35, easing: "easeOutSine", duration: 250 },
-        { value: 1, easing: "easeInOutQuad", duration: 500 },
+        {
+          value: function(el: any, i: number) {
+            return 1.0 + (0.25 * intensities[i]);
+          },
+          easing: "easeOutSine", 
+          duration: 250
+        },
+        { value: 1, easing: "easeInOutQuad", duration: 250 }
       ],
       translateY: [
-        { value: -8, easing: "easeOutSine", duration: 250 },
-        { value: 1, easing: "easeInOutQuad", duration: 500 },
+        {
+          value: function(el: any, i: number) {
+            return -15 * intensities[i];
+          },
+          easing: "easeOutSine", 
+          duration: 250
+        },
+        { value: 0, easing: "easeInOutQuad", duration: 270 }
       ],
       translateX: [
-        { value: -8, easing: "easeOutSine", duration: 250 },
-        { value: 1, easing: "easeInOutQuad", duration: 500 },
+        {
+          value: function(el: any, i: number) {
+            return -15 * intensities[i];
+          },
+          easing: "easeOutSine", 
+          duration: 250
+        },
+        { value: 0, easing: "easeInOutQuad", duration: 270 }
       ],
       opacity: [
-        { value: 1, easing: "easeOutSine", duration: 250 },
-        { value: 0.5, easing: "easeInOutQuad", duration: 500 },
+        {
+          value: function(el: any, i: number) {
+            return BASE_OPACITY + ((1 - BASE_OPACITY) * intensities[i]);
+          },
+          easing: "easeOutSine", 
+          duration: 200
+        },
+        { value: BASE_OPACITY, easing: "easeInOutQuad", duration: 300 }
       ],
       delay: function(el: any, i: number) {
         const row = Math.floor(i / GRID_WIDTH);
         const col = i % GRID_WIDTH;
         
         // Distance calculations for wave pattern:
-        // 1. Chebyshev Distance: max(|Δx|, |Δy|) - creates sharp diamond shapes
-        // 2. Euclidean Distance: √(Δx² + Δy²) - creates circular shapes
-        // 3. Blended Distance: weighted combination for rounded diamond effect
         const chebyshevDistance = Math.max(Math.abs(row - clickedRow), Math.abs(col - clickedCol));
         const euclideanDistance = Math.sqrt(Math.pow(row - clickedRow, 2) + Math.pow(col - clickedCol, 2));
+        const blendedDistance = chebyshevDistance * 0.1 + euclideanDistance * 0.9;
         
-        // Blend: 80% diamond + 20% circle = rounded diamond
-        // Adjust weights to control corner roundness (higher euclidean = more rounded)
-        const blendedDistance = chebyshevDistance * 0.8 + euclideanDistance * 0.2;
-        
-        // Round to ensure dots at similar distances animate together
-        return Math.round(blendedDistance) * 30;
+        return Math.round(blendedDistance) * 20 + Math.round(blendedDistance) * 3;
       },
+      complete: function() {
+        // Force correct final state to override any inline style issues
+        const dots = document.querySelectorAll('.dot-point');
+        dots.forEach(dot => {
+          (dot as HTMLElement).style.opacity = BASE_OPACITY.toString();
+        });
+      }
     });
-  };
+  }, []);
 
-  const dots = [];
-  let index = 0;
+  // Memoize dots generation to prevent re-renders
+  const dots = React.useMemo(() => {
+    const dotsArray = [];
+    let index = 0;
 
-  for (let i = 0; i < GRID_WIDTH; i++) {
-    for (let j = 0; j < GRID_HEIGHT; j++) {
-      dots.push(
-        <div
-          className="group cursor-crosshair rounded-none p-2 transition-colors hover:bg-zinc-600"
-          data-index={index}
-          key={`${i}-${j}`}
-        >
+    for (let i = 0; i < GRID_WIDTH; i++) {
+      for (let j = 0; j < GRID_HEIGHT; j++) {
+        dotsArray.push(
           <div
-            className="dot-point size-1 sm:size-2 rounded-none bg-gradient-to-tl from-secondary-dark to-secondary-light opacity-50 group-hover:from-primary-dark group-hover:to-primary-light"
+            className="group cursor-crosshair rounded-none p-2 transition-colors hover:bg-zinc-600"
             data-index={index}
-          />
-        </div>
-      );
-      index++;
+            key={`${i}-${j}`}
+          >
+            <div
+            className="dot-point size-3 sm:size-4 rounded-none bg-gradient-to-tl from-secondary-dark to-secondary-light opacity-50 group-hover:from-primary-dark group-hover:to-primary-light"
+              data-index={index}
+            />
+          </div>
+        );
+        index++;
+      }
     }
-  }
+    return dotsArray;
+  }, []);
 
   return (
     <div
       onClick={handleDotClick}
       style={{ gridTemplateColumns: `repeat(${GRID_WIDTH}, 1fr)` }}
-      className="absolute right-[10%] top-[50%] z-0 grid max-w-[75%] -translate-y-[50%] rotate-45"
+      className="dot-grid-container absolute right-[10%] top-[50%] z-0 grid max-w-[75%] -translate-y-[50%] rotate-45 opacity-0"
     >
       {dots}
     </div>
