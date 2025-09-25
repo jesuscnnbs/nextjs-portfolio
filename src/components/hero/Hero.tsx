@@ -4,7 +4,7 @@ import { OutlineButton } from "../buttons/OutlineButton";
 
 const Hero = () => {
   return (
-    <section className="section-wrapper text-slat-100 py-24 md:py-32 mb-32 overflow-hidden">
+    <section className="section-wrapper text-slat-100 pt-24 md:pt-32 pb-48 md:pb-64 overflow-hidden relative">
       <div className="relative w-full">
         <div className="pointer-events-none relative z-10 mx-auto max-w-5xl px-4 md:px-8">
           <Reveal>

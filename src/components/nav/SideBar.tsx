@@ -30,7 +30,7 @@ export const SideBar = () => {
       initial={{ x: -70 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.5 }}
-      className="no-scrollbar bg-secondary-darkest h-screen sticky top-0 left-0 z-20 flex flex-col items-center overflow-y-scroll"
+      className="hidden sm:flex no-scrollbar bg-secondary-darkest h-screen sticky top-0 left-0 z-20 flex-col items-center overflow-y-scroll w-full"
     >
       <SideBarLink
       selected={selected}
@@ -38,8 +38,8 @@ export const SideBar = () => {
       value=""
       href="#"
       >
-        <span className="shrink-0 text-xl font-black leading-[1] size-8 flex items-center justify-center my-4">
-          <span className="text-4xl text-secondary-light">◆</span>
+        <span className="shrink-0 text-xl font-black leading-[1] size-6 sm:size-8 flex items-center justify-center my-2 sm:my-4">
+          <span className="text-2xl sm:text-4xl text-secondary-light">◆</span>
         </span>
       </SideBarLink>
       <SideBarLink
