@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import { HomPage } from "@/components";
 import Head from "next/head";
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,8 @@ export default function Home() {
       <main className={inter.className}>
         <HomPage />
       </main>
+      <Analytics />
+      
     </>
   );
 }
