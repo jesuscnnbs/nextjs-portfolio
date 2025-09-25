@@ -5,7 +5,7 @@ import { OutlineButton } from "../buttons/OutlineButton";
 
 export const Header = () => {
   return (
-    <header className="sm:h-[122px] h-[72px] px-4 sticky top-0 z-20 bg-mask-pattern">
+    <header className="h-[72px] px-4 sticky top-0 z-20 bg-mask-pattern">
       <div className="flex items-center justify-between h-full">
         <MyLinks />
         <OutlineButton onClick={() => window.open("/CV_Jesus_EN.pdf")} className="h-8 bg-secondary-content text-primary-content px-4 text-sm">

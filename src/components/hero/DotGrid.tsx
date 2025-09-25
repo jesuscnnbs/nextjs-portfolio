@@ -3,7 +3,7 @@ import anime from "animejs";
 
 const GRID_WIDTH = 17;
 const GRID_HEIGHT = 17;
-const BASE_OPACITY = 0.35;
+const BASE_OPACITY = 0.4;
 
 const DotGrid = () => {
   const triggerInitialAnimation = React.useCallback(() => {
@@ -21,15 +21,15 @@ const DotGrid = () => {
   const slideInAnimation = React.useCallback(() => {
     anime({
       targets: '.dot-grid-container',
-      translateX: [50, 0],
-      translateY: [-20, 0],
+      translateY: [140, 0],
+      scale: [0.95, 1],
       rotate: [45, 45],
       opacity: [0, 1],
       easing: 'easeOutCubic',
       duration: 800,
       complete: () => {
         // Trigger click animation after slide in completes
-        setTimeout(triggerInitialAnimation, 300);
+        setTimeout(triggerInitialAnimation, 0);
       }
     });
   }, [triggerInitialAnimation]);
@@ -62,7 +62,7 @@ const DotGrid = () => {
       // Use squared distance for intensity decay
       const distanceSquared = (currentRow - clickedRow) ** 2 + (currentCol - clickedCol) ** 2;
       // Intensity decays with square of distance (slower falloff)
-      const intensity = Math.max(0, 1 / (1 + distanceSquared * 0.01));
+      const intensity = Math.max(0, 1 / (1 + distanceSquared * 0.02));
       intensities[i] = intensity;
     }
     
@@ -139,12 +139,12 @@ const DotGrid = () => {
       for (let j = 0; j < GRID_HEIGHT; j++) {
         dotsArray.push(
           <div
-            className="group cursor-crosshair rounded-none p-2 transition-colors hover:bg-zinc-600"
+            className="group cursor-crosshair rounded-none p-1 sm:p-2 transition-colors hover:bg-zinc-600"
             data-index={index}
             key={`${i}-${j}`}
           >
             <div
-            className="dot-point size-3 sm:size-4 rounded-none bg-gradient-to-tl from-secondary-dark to-secondary-light opacity-50 group-hover:from-primary-dark group-hover:to-primary-light"
+            className="dot-point size-2 sm:size-3 rounded-none bg-gradient-to-tl from-secondary-dark to-secondary-light opacity-50 group-hover:from-primary-dark group-hover:to-primary-light"
               data-index={index}
             />
           </div>
@@ -159,7 +159,7 @@ const DotGrid = () => {
     <div
       onClick={handleDotClick}
       style={{ gridTemplateColumns: `repeat(${GRID_WIDTH}, 1fr)` }}
-      className="dot-grid-container absolute right-[10%] top-[50%] z-0 grid max-w-[75%] -translate-y-[50%] rotate-45 opacity-0"
+      className="dot-grid-container absolute right-[10%] top-[10%] z-0 grid max-w-[75%] -translate-y-[50%] rotate-45 opacity-0"
     >
       {dots}
     </div>
