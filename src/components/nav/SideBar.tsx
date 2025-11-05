@@ -45,10 +45,10 @@ export const SideBar = () => {
       <SideBarLink
         selected={selected}
         setSelected={setSelected}
-        value="about"
-        href="#about"
+        value="experience"
+        href="#experience"
       >
-        About
+        Exp.
       </SideBarLink>
       <SideBarLink
         selected={selected}
@@ -61,10 +61,10 @@ export const SideBar = () => {
       <SideBarLink
         selected={selected}
         setSelected={setSelected}
-        value="experience"
-        href="#experience"
+        value="about"
+        href="#about"
       >
-        Exp.
+        About
       </SideBarLink>
       <SideBarLink
         selected={selected}
