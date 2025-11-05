@@ -14,9 +14,27 @@ export const Experience = () => {
 
 const experience = [
   {
+    title: "Artificial Intelligence Talentum",
+    position: "Full Stack Developer",
+    time: "May 2025 - July 2025",
+    location: "Murcia",
+    description:
+      "SpringBoot 3 scalable, REST API using with focus on performance, security, modern Java features and consuming SOAP services with a responsive front-end developed in React JS",
+    tech: [
+      "React",
+      "Java",
+      "Spring Boot",
+      "API REST",
+      "Git",
+      "Linux",
+      "Docker",
+      "PostgreSQL",
+    ],
+  },
+  {
     title: "Freelance",
     position: "Full Stack Developer",
-    time: "November 2024- Present",
+    time: "November 2024- May 2025",
     location: "Almería",
     description:
       "I help build and scale products for small businesses and startups.",
