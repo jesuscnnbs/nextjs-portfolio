@@ -1,6 +1,7 @@
 import { AiFillMail } from "react-icons/ai";
 import Link from "next/link";
 import Reveal from "../util/Reveal";
+import { siteConfig } from "@/config/site";
 
 export const Contact = () => {
   return (
@@ -15,7 +16,7 @@ export const Contact = () => {
           <p className="text-center my-8 text-zinc-300 leading-relaxed">
             Shoot me an email if you want to connect! You can also find me on{" "}
             <Link
-              href="https://www.linkedin.com"
+              href={siteConfig.social.linkedin}
               target="_blank"
               className="text-primary-light hover:underline"
             >
@@ -24,10 +25,10 @@ export const Contact = () => {
           </p>
         </Reveal>
         <Reveal width="w-full">
-          <Link href="mailto:jesuscnnbs@gmail.com">
+          <Link href={`mailto:${siteConfig.email}`}>
             <div className="flex items-center justify-center gap-2 w-fit text-lg md:text-2xl whitespace-normal mx-auto hover:text-secondary-light transition-colors">
               <AiFillMail />
-              <span>jesuscnnbs@gmail.com</span>
+              <span>{siteConfig.email}</span>
             </div>
           </Link>
         </Reveal>

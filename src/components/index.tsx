@@ -15,9 +15,9 @@ export const HomPage = () => {
         <Header />
         <Hero />
         <div className="mx-auto max-w-5xl px-4 md:px-8 space-y-32 pb-24 overflow-hidden">
-          <About />
-          <Projects />
           <Experience />
+          <Projects />
+          <About />
           <Contact />
         </div>
       </main>

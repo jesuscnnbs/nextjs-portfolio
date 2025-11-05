@@ -40,23 +40,26 @@ const projects = [
     title: "Santa Mónica",
     imgSrc: "project-imgs/santamonica.jpg",
     code: "https://github.com/jesuscnnbs/sm-medusa-storefront",
-    projectLink: "https://sm-medusa-storefront.vercel.app/es",
-    tech: ["Medusajs Ecommerce", "Nextjs", "Tailwind", "Typescript", "Stripe", "Heroku", "Vercel"],
+    projectLink: "https://santamonicagourmet.com/",
+    tech: ["Nextjs", "Tailwind", "Framer", "Lenis", "Typescript","Neon Database", "Playwright", "Sql"],
     description:
-      "An ecommerce for a burger restaurant in Almería, with the best reviews in town.",
+      "A web for a burger restaurant in Almería, with the best reviews in town.",
     modalContent: (
       <>
         <p>
-        An ecommerce for a burger restaurant in Almería, with the best reviews in town.
+        A web for a burger restaurant in Almería, with the best reviews in town.
         </p>
         <p>
-          It is developed with Medusa, a headless ecommerce platform, and Nextjs, Tailwind and Typescript.
+          It is developed with Nextjs, Tailwind and Typescript.
         </p>
         <p>
-          The payment is made with Stripe and the database is Postgres.
+          The admin is developed using JWT authentication and Neon Database for storing the data.
         </p>
         <p>
-          The front is stored in Vercel and the back in Heroku.
+          The web is fully tested using Playwright for end to end testing.
+        </p>
+        <p>
+          It also uses Framer for animations and Lenis for smooth scrolling.
         </p>
       </>
     ),
