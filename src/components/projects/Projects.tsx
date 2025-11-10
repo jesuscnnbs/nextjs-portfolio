@@ -20,7 +20,7 @@ const projects = [
   {
     title: "Productive Hub",
     imgSrc: "project-imgs/productive_hub_home.png",
-    code: "https://github.com/jesuscnnbs/yo-diablo-next-ts",
+    code: "https://github.com/jesuscnnbs/vuejs-todo-app",
     projectLink: "https://vuejs-todo-app-nu.vercel.app/",
     tech: ["Vuejs", "Vite", "Vercel", "Drizzle ORM", "Neon PSQL", "Typescript", "Tailwind", "JWT Auth"],
     description:
