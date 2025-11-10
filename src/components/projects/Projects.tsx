@@ -18,10 +18,29 @@ export const Projects = () => {
 
 const projects = [
   {
+    title: "Productive Hub",
+    imgSrc: "project-imgs/productive_hub_home.png",
+    code: "https://github.com/jesuscnnbs/yo-diablo-next-ts",
+    projectLink: "https://vuejs-todo-app-nu.vercel.app/",
+    tech: ["Vuejs", "Vite", "Vercel", "Drizzle ORM", "Neon PSQL", "Typescript", "Tailwind", "JWT Auth"],
+    description:
+      "A web to create productivity apps to practice and improve using vuejs",
+    modalContent: (
+      <>
+        <p>
+          A web to create productivity apps to practice and improve using vuejs
+        </p>
+        <p>
+          Developed with Vuejs, and Neon (a serverless Postgres database)
+        </p>
+      </>
+    ),
+  },
+  {
     title: "Yo diablo",
     imgSrc: "project-imgs/yodiablo.jpg",
-    code: "https://github.com/jesuscnnbs",
-    projectLink: "https://yo-diablo-next-ts.vercel.app/es",
+    code: "https://github.com/jesuscnnbs/yo-diablo-next-ts",
+    projectLink: "https://www.yodiablo.com",
     tech: ["Supabase", "Nextjs", "Tailwind", "Typescript"],
     description:
       "A web for a band that needs to publish their concerts and show their products",
