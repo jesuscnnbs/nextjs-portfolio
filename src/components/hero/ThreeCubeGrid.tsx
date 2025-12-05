@@ -60,7 +60,7 @@ const ThreeCubeGrid = () => {
       specular: 0xffffff,
       shininess: 260,
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.4,
     });
 
     // Create cubes
@@ -110,6 +110,13 @@ const ThreeCubeGrid = () => {
       cubeGroupRef.current.position.x = Math.min(20, scrollProgress * 50);
       cubeGroupRef.current.position.y = Math.min(20, scrollProgress * 50);
       cubeGroupRef.current.position.z = Math.min(20, scrollProgress * 50);
+
+      // Interpolate opacity from 0.5 to 0.15 based on fixed scroll amount
+      const startOpacity = 0.4;
+      const endOpacity = 0.15;
+      const opacityScrollDistance = 200; // Fixed amount of scroll in pixels
+      const opacityProgress = Math.min(scrollY / opacityScrollDistance, 1);
+      material.opacity = startOpacity + (endOpacity - startOpacity) * opacityProgress;
     };
 
     window.addEventListener("scroll", handleScroll);
