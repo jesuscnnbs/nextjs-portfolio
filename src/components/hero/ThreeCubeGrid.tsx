@@ -48,7 +48,7 @@ const ThreeCubeGrid = () => {
     cubeGroupRef.current = cubeGroup;
 
     // Create 10x10x10 grid of cubes
-    const gridSize = 6;
+    const gridSize = 5;
     const spacing = 4;
     const offset = ((gridSize - 1) * spacing) / 2;
 
