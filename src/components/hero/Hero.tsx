@@ -1,5 +1,5 @@
 import Reveal from "../util/Reveal";
-import DotGrid from "./DotGrid";
+import ThreeCubeGrid from "./ThreeCubeGrid";
 import { OutlineButton } from "../buttons/OutlineButton";
 
 const Hero = () => {
@@ -45,7 +45,7 @@ const Hero = () => {
             </OutlineButton>
           </Reveal>
         </div>
-        <DotGrid />
+        <ThreeCubeGrid />
       </div>
     </section>
   );
