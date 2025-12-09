@@ -3,6 +3,43 @@ import * as THREE from "three";
 
 const INITIAL_OPACITY = 0.3;
 
+// Detect device performance level
+const detectPerformanceTier = (): 'high' | 'medium' | 'low' => {
+  // Check if mobile device
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  // Check device memory (if available)
+  const deviceMemory = (navigator as any).deviceMemory; // in GB
+
+  // Check CPU cores
+  const cpuCores = navigator.hardwareConcurrency || 4;
+
+  // Performance scoring
+  let score = 0;
+
+  // Desktop gets higher score
+  if (!isMobile) score += 3;
+
+  // Memory-based scoring
+  if (deviceMemory) {
+    if (deviceMemory >= 8) score += 3;
+    else if (deviceMemory >= 4) score += 2;
+    else score += 1;
+  } else {
+    // Default if memory not available
+    score += isMobile ? 1 : 2;
+  }
+
+  // CPU-based scoring
+  if (cpuCores >= 8) score += 2;
+  else if (cpuCores >= 4) score += 1;
+
+  // Determine tier
+  if (score >= 6) return 'high';
+  if (score >= 4) return 'medium';
+  return 'low';
+};
+
 const ThreeCubeGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -11,6 +48,7 @@ const ThreeCubeGrid = () => {
   const cubeGroupRef = useRef<THREE.Group | null>(null);
   const animationFrameRef = useRef<number | null>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const [performanceTier] = useState(() => detectPerformanceTier());
 
   useEffect(() => {
     setIsMounted(true);
@@ -18,6 +56,36 @@ const ThreeCubeGrid = () => {
 
   useEffect(() => {
     if (!isMounted || !containerRef.current) return;
+
+    // Performance-based settings
+    const performanceSettings = {
+      high: {
+        gridSize: 4,
+        spacing: 5,
+        cubeSize: 2.5,
+        segments: 1, // Box geometry segments (higher = more detailed)
+        antialias: true,
+        pixelRatio: Math.min(window.devicePixelRatio, 2),
+      },
+      medium: {
+        gridSize: 3,
+        spacing: 5,
+        cubeSize: 2.5,
+        segments: 1,
+        antialias: true,
+        pixelRatio: 1,
+      },
+      low: {
+        gridSize: 2,
+        spacing: 6,
+        cubeSize: 3,
+        segments: 1,
+        antialias: false,
+        pixelRatio: 1,
+      },
+    };
+
+    const settings = performanceSettings[performanceTier];
 
     // Scene setup
     const scene = new THREE.Scene();
@@ -37,14 +105,14 @@ const ThreeCubeGrid = () => {
     camera.lookAt(-25, -15, 0);
     cameraRef.current = camera;
 
-    // Renderer setup
+    // Renderer setup with performance-based settings
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: settings.antialias,
       alpha: true,
     });
     // Use container dimensions instead of window to avoid mobile browser bar resize issues
     renderer.setSize(containerWidth, containerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(settings.pixelRatio);
     renderer.setClearColor(0x000000, 0); // Transparent background
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
@@ -53,13 +121,14 @@ const ThreeCubeGrid = () => {
     const cubeGroup = new THREE.Group();
     cubeGroupRef.current = cubeGroup;
 
-    // Create 10x10x10 grid of cubes
-    const gridSize = 4;
-    const spacing = 5;
+    // Use performance settings
+    const gridSize = settings.gridSize;
+    const spacing = settings.spacing;
+    const cubeSize = settings.cubeSize;
     const offset = ((gridSize - 1) * spacing) / 2;
 
     // Cube geometry and material
-    const geometry = new THREE.BoxGeometry(2.5, 2.5, 2.5);
+    const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
     const material = new THREE.MeshPhongMaterial({
       color: 0x8844ff,
       emissive: 0x6804af,
@@ -185,7 +254,7 @@ const ThreeCubeGrid = () => {
       geometry.dispose();
       material.dispose();
     };
-  }, [isMounted]);
+  }, [isMounted, performanceTier]);
 
   if (!isMounted) {
     return null;
