@@ -186,13 +186,13 @@ const ThreeCubeGrid = () => {
   return (
     <div
       ref={containerRef}
-      className="fixed top-0 left-0 w-full h-screen pointer-events-none z-0"
+      className="fixed top-0 left-0 w-full pointer-events-none z-0"
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         width: '100%',
-        height: '100vh',
+        height: '100lvh',
         pointerEvents: 'none',
         zIndex: 0,
       }}
