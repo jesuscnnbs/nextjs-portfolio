@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
+const INITIAL_OPACITY = 0.3;
+
 const ThreeCubeGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -48,25 +50,29 @@ const ThreeCubeGrid = () => {
     cubeGroupRef.current = cubeGroup;
 
     // Create 10x10x10 grid of cubes
-    const gridSize = 5;
-    const spacing = 4;
+    const gridSize = 4;
+    const spacing = 5;
     const offset = ((gridSize - 1) * spacing) / 2;
 
     // Cube geometry and material
-    const geometry = new THREE.BoxGeometry(2, 2, 2);
+    const geometry = new THREE.BoxGeometry(2.5, 2.5, 2.5);
     const material = new THREE.MeshPhongMaterial({
       color: 0x8844ff,
       emissive: 0x6804af,
       specular: 0xffffff,
-      shininess: 260,
+      shininess: 300,
       transparent: true,
-      opacity: 0.2,
+      opacity: INITIAL_OPACITY,
     });
 
-    // Create cubes
+    // Create cubes only on the outer shell
     for (let x = 0; x < gridSize; x++) {
       for (let y = 0; y < gridSize; y++) {
         for (let z = 0; z < gridSize; z++) {
+          const isInner = x !== 0 && y !== 0 && z !== 0 &&
+                         x !== gridSize - 1 && y !== gridSize - 1 && z !== gridSize - 1;
+          if (isInner) continue;
+
           const cube = new THREE.Mesh(geometry, material);
           cube.position.set(
             x * spacing - offset,
@@ -81,8 +87,8 @@ const ThreeCubeGrid = () => {
     scene.add(cubeGroup);
 
     // Lighting - positioned rgb(200, 102, 244)
-    const light = new THREE.PointLight(0xc866f4, 2, 100);
-    light.position.set(-15, 15, 15);
+    const light = new THREE.PointLight(0xc866f4, 20, 100, 1.2);
+    light.position.set(50, 50, -50);
     scene.add(light);
 
     // Ambient light for overall visibility
@@ -110,6 +116,13 @@ const ThreeCubeGrid = () => {
       cubeGroupRef.current.position.x = Math.min(20, scrollProgress * 50);
       cubeGroupRef.current.position.y = Math.min(20, scrollProgress * 50);
       cubeGroupRef.current.position.z = Math.min(20, scrollProgress * 50);
+
+      // Interpolate opacity from 0.6 to 0.15 based on fixed scroll amount
+      const startOpacity = INITIAL_OPACITY;
+      const endOpacity = 0.15;
+      const opacityScrollDistance = 200; // Fixed amount of scroll in pixels
+      const opacityProgress = Math.min(scrollY / opacityScrollDistance, 1);
+      material.opacity = startOpacity + (endOpacity - startOpacity) * opacityProgress;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -173,13 +186,13 @@ const ThreeCubeGrid = () => {
   return (
     <div
       ref={containerRef}
-      className="fixed top-0 left-0 w-full h-screen pointer-events-none z-0"
+      className="fixed top-0 left-0 w-full pointer-events-none z-0"
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         width: '100%',
-        height: '100vh',
+        height: '100lvh',
         pointerEvents: 'none',
         zIndex: 0,
       }}
