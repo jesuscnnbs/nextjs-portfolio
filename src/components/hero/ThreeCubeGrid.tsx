@@ -24,9 +24,12 @@ const ThreeCubeGrid = () => {
     sceneRef.current = scene;
 
     // Camera setup
+    // Use container dimensions for aspect ratio
+    const containerWidth = containerRef.current.clientWidth;
+    const containerHeight = containerRef.current.clientHeight;
     const camera = new THREE.PerspectiveCamera(
       75,
-      window.innerWidth / window.innerHeight,
+      containerWidth / containerHeight,
       0.1,
       1000
     );
@@ -39,7 +42,8 @@ const ThreeCubeGrid = () => {
       antialias: true,
       alpha: true,
     });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    // Use container dimensions instead of window to avoid mobile browser bar resize issues
+    renderer.setSize(containerWidth, containerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0); // Transparent background
     containerRef.current.appendChild(renderer.domElement);
@@ -129,11 +133,15 @@ const ThreeCubeGrid = () => {
 
     // Handle window resize
     const handleResize = () => {
-      if (!cameraRef.current || !rendererRef.current) return;
+      if (!cameraRef.current || !rendererRef.current || !containerRef.current) return;
 
-      cameraRef.current.aspect = window.innerWidth / window.innerHeight;
+      // Use container dimensions to avoid mobile browser bar resize issues
+      const containerWidth = containerRef.current.clientWidth;
+      const containerHeight = containerRef.current.clientHeight;
+
+      cameraRef.current.aspect = containerWidth / containerHeight;
       cameraRef.current.updateProjectionMatrix();
-      rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+      rendererRef.current.setSize(containerWidth, containerHeight);
     };
 
     window.addEventListener("resize", handleResize);
@@ -195,6 +203,7 @@ const ThreeCubeGrid = () => {
         height: '100lvh',
         pointerEvents: 'none',
         zIndex: 0,
+        overflow: 'hidden',
       }}
     />
   );
