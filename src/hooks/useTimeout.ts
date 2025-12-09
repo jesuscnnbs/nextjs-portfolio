@@ -13,7 +13,7 @@ interface UseTimeoutResult {
  */
 export const useTimeout = (callback: () => void, delay: number): UseTimeoutResult => {
   const callbackRef = useRef(callback);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>(null);
 
   // Remember the latest callback
   useEffect(() => {

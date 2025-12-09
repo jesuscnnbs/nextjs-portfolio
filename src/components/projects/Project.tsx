@@ -1,12 +1,12 @@
 import { useAnimation, useInView, motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ReactElement } from "react";
 import { AiFillGithub, AiOutlineExport } from "react-icons/ai";
 import { ProjectModal } from "./ProjectModal";
 import Reveal from "../util/Reveal";
 
 interface Props {
-  modalContent: JSX.Element;
+  modalContent: ReactElement;
   description: string;
   projectLink: string;
   imgSrc: string;

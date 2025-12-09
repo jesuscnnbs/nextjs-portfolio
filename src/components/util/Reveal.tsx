@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, ReactElement } from "react";
 import { useAnimation, useInView, motion } from "framer-motion";
 
 interface RevealProps {
-  children: JSX.Element;
+  children: ReactElement;
   width?: string;
 }
 
