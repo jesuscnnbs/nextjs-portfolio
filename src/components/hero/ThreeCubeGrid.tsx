@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 const INITIAL_OPACITY = 0.3;
+const ROTATION_PROBABILITY = 0.03; // Probability that a cube will rotate during each check
+const ROTATION_CHECK_INTERVAL = 0.3; // Check for rotations every 0.1 seconds
+const ROTATION_SPEED = 0.01; // Speed of rotation animation
 
 // Detect device performance level
 const detectPerformanceTier = (): 'high' | 'medium' | 'low' => {
@@ -152,6 +155,13 @@ const ThreeCubeGrid = () => {
             y * spacing - offset,
             z * spacing - offset
           );
+
+          // Initialize rotation tracking in userData
+          cube.userData = {
+            targetRotation: { x: 0, y: 0, z: 0 },
+            isRotating: false,
+          };
+
           cubeGroup.add(cube);
         }
       }
@@ -159,19 +169,35 @@ const ThreeCubeGrid = () => {
 
     scene.add(cubeGroup);
 
-    // Lighting - positioned rgb(200, 102, 244)
-    const light = new THREE.PointLight(0xc866f4, 20, 100, 1.2);
-    light.position.set(50, 50, -50);
-    scene.add(light);
+    // Multi-light setup for more dynamic appearance
 
-    // Ambient light for overall visibility
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
-    scene.add(ambientLight);
+    // Main key light (purple) - from top-right
+    const keyLight = new THREE.PointLight(0xc866f4, 30, 150, 1.5);
+    keyLight.position.set(40, 40, 30);
+    scene.add(keyLight);
 
-    // Add some edge lighting
-    const rimLight = new THREE.DirectionalLight(0x6633cc, 0.5);
-    rimLight.position.set(-10, 5, -10);
+    // Secondary accent light (orange/red) - from opposite side for contrast
+    const accentLight = new THREE.PointLight(0xff6644, 25, 120, 1.3);
+    accentLight.position.set(-40, 20, -30);
+    scene.add(accentLight);
+
+    // Fill light (blue-purple) - softens shadows
+    const fillLight = new THREE.PointLight(0x4466ff, 15, 100, 1.2);
+    fillLight.position.set(0, -30, 40);
+    scene.add(fillLight);
+
+    // Rim/back light - highlights edges
+    const rimLight = new THREE.DirectionalLight(0xaa66ff, 1.5);
+    rimLight.position.set(-20, 10, -20);
     scene.add(rimLight);
+
+    // Hemisphere light for ambient base lighting (sky and ground colors)
+    const hemisphereLight = new THREE.HemisphereLight(0x6644aa, 0x221144, 0.6);
+    scene.add(hemisphereLight);
+
+    // Ambient light for overall visibility (kept lower since we have hemisphere)
+    const ambientLight = new THREE.AmbientLight(0x404040, 0.3);
+    scene.add(ambientLight);
 
     // Handle scroll for rotation
     const handleScroll = () => {
@@ -215,6 +241,9 @@ const ThreeCubeGrid = () => {
 
     window.addEventListener("resize", handleResize);
 
+    // Track time for periodic rotation checks
+    let lastRotationCheck = Date.now();
+
     // Animation loop
     const animate = () => {
       animationFrameRef.current = requestAnimationFrame(animate);
@@ -223,6 +252,59 @@ const ThreeCubeGrid = () => {
         // Add subtle idle rotation when not scrolling
         if (cubeGroupRef.current) {
           cubeGroupRef.current.rotation.z += 0.001;
+
+          // Check if it's time to potentially trigger rotations
+          const currentTime = Date.now();
+          if (currentTime - lastRotationCheck >= ROTATION_CHECK_INTERVAL * 1000) {
+            lastRotationCheck = currentTime;
+
+            // Check each cube for potential rotation
+            cubeGroupRef.current.children.forEach((child) => {
+              const cube = child as THREE.Mesh;
+              if (!cube.userData.isRotating && Math.random() < ROTATION_PROBABILITY) {
+                // Select random axis (0=x, 1=y, 2=z)
+                const axis = Math.floor(Math.random() * 3);
+                const rotationAmount = Math.PI / 2; // 90 degrees
+
+                // Set target rotation
+                cube.userData.isRotating = true;
+                if (axis === 0) {
+                  cube.userData.targetRotation.x = cube.rotation.x + rotationAmount;
+                } else if (axis === 1) {
+                  cube.userData.targetRotation.y = cube.rotation.y + rotationAmount;
+                } else {
+                  cube.userData.targetRotation.z = cube.rotation.z + rotationAmount;
+                }
+              }
+            });
+          }
+
+          // Animate rotating cubes
+          cubeGroupRef.current.children.forEach((child) => {
+            const cube = child as THREE.Mesh;
+            if (cube.userData.isRotating) {
+              // Smoothly interpolate to target rotation
+              const epsilon = 0.01;
+              let reachedTarget = true;
+
+              ['x', 'y', 'z'].forEach((axis) => {
+                const current = cube.rotation[axis as 'x' | 'y' | 'z'];
+                const target = cube.userData.targetRotation[axis];
+                const diff = target - current;
+
+                if (Math.abs(diff) > epsilon) {
+                  cube.rotation[axis as 'x' | 'y' | 'z'] += diff * ROTATION_SPEED;
+                  reachedTarget = false;
+                } else {
+                  cube.rotation[axis as 'x' | 'y' | 'z'] = target;
+                }
+              });
+
+              if (reachedTarget) {
+                cube.userData.isRotating = false;
+              }
+            }
+          });
         }
 
         rendererRef.current.render(sceneRef.current, cameraRef.current);
