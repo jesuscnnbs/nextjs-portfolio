@@ -14,5 +14,5 @@ export const siteConfig = {
   },
 
   // Assets and documents
-  resume: "/CV_Jesus_EN.pdf",
+  resume: "/cv_en.pdf",
 } as const;

@@ -59,7 +59,7 @@ const projects = [
     title: "Santa Mónica",
     imgSrc: "project-imgs/santamonica.jpg",
     code: "https://github.com/jesuscnnbs/sm-medusa-storefront",
-    projectLink: "https://santamonicagourmet.com/",
+    projectLink: "https://sm-medusa-storefront.vercel.app/",
     tech: ["Nextjs", "Tailwind", "Framer", "Lenis", "Typescript","Neon Database", "Playwright", "Sql"],
     description:
       "A web for a burger restaurant in Almería, with the best reviews in town.",
