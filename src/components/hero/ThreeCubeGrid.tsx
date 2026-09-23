@@ -1,7 +1,56 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
-const INITIAL_OPACITY = 0.3;
+const INITIAL_OPACITY = 0.8;
+
+// Generate a procedural rough-surface bump map using smoothed value noise
+const generateBumpTexture = (size = 512, cells = 32) => {
+  const coarse: number[][] = [];
+  for (let y = 0; y <= cells; y++) {
+    const row: number[] = [];
+    for (let x = 0; x <= cells; x++) {
+      row.push(Math.random());
+    }
+    coarse.push(row);
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d")!;
+  const image = ctx.createImageData(size, size);
+  const cellSize = size / cells;
+
+  for (let py = 0; py < size; py++) {
+    for (let px = 0; px < size; px++) {
+      const gx = px / cellSize;
+      const gy = py / cellSize;
+      const x0 = Math.min(Math.floor(gx), cells - 1);
+      const y0 = Math.min(Math.floor(gy), cells - 1);
+      const x1 = Math.min(x0 + 1, cells);
+      const y1 = Math.min(y0 + 1, cells);
+      const fx = gx - x0;
+      const fy = gy - y0;
+
+      const top = coarse[y0][x0] * (1 - fx) + coarse[y0][x1] * fx;
+      const bottom = coarse[y1][x0] * (1 - fx) + coarse[y1][x1] * fx;
+      const value = Math.floor((top * (1 - fy) + bottom * fy) * 255);
+
+      const idx = (py * size + px) * 4;
+      image.data[idx] = value;
+      image.data[idx + 1] = value;
+      image.data[idx + 2] = value;
+      image.data[idx + 3] = 255;
+    }
+  }
+
+  ctx.putImageData(image, 0, 0);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  return texture;
+};
 
 // Detect device performance level
 const detectPerformanceTier = (): 'high' | 'medium' | 'low' => {
@@ -129,11 +178,14 @@ const ThreeCubeGrid = () => {
 
     // Cube geometry and material
     const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
-    const material = new THREE.MeshPhongMaterial({
+    const bumpTexture = generateBumpTexture();
+    const material = new THREE.MeshStandardMaterial({
       color: 0x8844ff,
-      emissive: 0x6804af,
-      specular: 0xffffff,
-      shininess: 300,
+      emissive: 0x1a0a33,
+      roughness: 0.4,
+      metalness: 1,
+      bumpMap: bumpTexture,
+      bumpScale: 2,
       transparent: true,
       opacity: INITIAL_OPACITY,
     });
@@ -159,19 +211,25 @@ const ThreeCubeGrid = () => {
 
     scene.add(cubeGroup);
 
-    // Lighting - positioned rgb(200, 102, 244)
-    const light = new THREE.PointLight(0xc866f4, 20, 100, 1.2);
-    light.position.set(50, 50, -50);
-    scene.add(light);
+    // Standard three-point lighting setup with a purple tone
+    // Key light - main illumination from the upper-left
+    const keyLight = new THREE.DirectionalLight(0xe6d6ff, 2.5);
+    keyLight.position.set(15, 25, 15);
+    scene.add(keyLight);
 
-    // Ambient light for overall visibility
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
-    scene.add(ambientLight);
+    // Fill light - softens shadows on the opposite side
+    const fillLight = new THREE.DirectionalLight(0xb28aff, 0.6);
+    fillLight.position.set(-15, 5, 0);
+    scene.add(fillLight);
 
-    // Add some edge lighting
-    const rimLight = new THREE.DirectionalLight(0x6633cc, 0.5);
-    rimLight.position.set(-10, 5, -10);
+    // Rim light - subtle edge highlight from behind to separate the cubes
+    const rimLight = new THREE.DirectionalLight(0x9966ff, 1.0);
+    rimLight.position.set(-20, 15, -20);
     scene.add(rimLight);
+
+    // Ambient light - base visibility inside shadowed areas
+    const ambientLight = new THREE.AmbientLight(0x1b1230, 0.5);
+    scene.add(ambientLight);
 
     // Handle scroll for rotation
     const handleScroll = () => {
@@ -253,6 +311,7 @@ const ThreeCubeGrid = () => {
 
       geometry.dispose();
       material.dispose();
+      bumpTexture.dispose();
     };
   }, [isMounted, performanceTier]);
 
