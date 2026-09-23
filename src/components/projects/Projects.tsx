@@ -1,8 +1,24 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { SectionHeader } from "../util/SectionHeader";
 import { Project } from "./Project";
 
+export type ProjectType = "ai" | "web";
+
+export interface ProjectProps {
+  title: string;
+  imgSrc: string;
+  code: string;
+  projectLink: string;
+  tech: string[];
+  description: string;
+  modalContent: ReactElement;
+  type: ProjectType;
+}
+
 export const Projects = () => {
+  const SHOW_AI_PROJECTS = false;
+  const projects: ProjectProps[] = SHOW_AI_PROJECTS ? aiProjects : webProjects;
+
   return (
     <section className="section-wrapper py-20" id="projects">
       <SectionHeader title="Projects" dir="r" />
@@ -16,7 +32,7 @@ export const Projects = () => {
   );
 };
 
-const projects = [
+const webProjects: ProjectProps[] = [
   {
     title: "Productive Hub",
     imgSrc: "project-imgs/productive_hub_home.png",
@@ -35,6 +51,7 @@ const projects = [
         </p>
       </>
     ),
+    type: "web",
   },
   {
     title: "Yo diablo",
@@ -54,6 +71,7 @@ const projects = [
         </p>
       </>
     ),
+    type: "web",
   },
   {
     title: "Santa Mónica",
@@ -82,6 +100,7 @@ const projects = [
         </p>
       </>
     ),
+    type: "web",
   },
   {
     title: "Innsomnia web 2020",
@@ -107,5 +126,8 @@ const projects = [
         </p>
       </>
     ),
+    type: "web",
   },
 ];
+
+const aiProjects: ProjectProps[] = [];

@@ -9,16 +9,16 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Portfolio - jesuscnnbs</title>
-        <meta name="description" content="Portfolio web page for jesuscnnbs front-end developer" />
+        <title>AI FullStack Developer - jesuscnnbs</title>
+        <meta name="description" content="Portfolio of jesuscnnbs, AI FullStack Developer building AI-powered web applications" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://nextjs-portfolio-six-green.vercel.app" />
-        <meta property="og:title" content="Portfolio - jesuscnnbs" />
-        <meta property="og:description" content="Portfolio web page for jesuscnnbs front-end developer" />
+        <meta property="og:title" content="AI FullStack Developer - jesuscnnbs" />
+        <meta property="og:description" content="Portfolio of jesuscnnbs, AI FullStack Developer building AI-powered web applications" />
         <meta property="og:image" content="https://nextjs-portfolio-six-green.vercel.app/frontend-bg.jpg" />
         
 

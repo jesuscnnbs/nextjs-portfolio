@@ -15,14 +15,14 @@ export const About = () => {
               <span className="bg-secondary-dark text-white py-2 px-3 font-bold mr-1 float-left text-2xl">
                 I
               </span>
-              &apos;m Jesús, a web developer from Almería, Andalucía, Spain. I specialize in frontend development,
-              primarily with React, Next.js and Tailwind CSS.
+              &apos;m an AI Engineer with a strong foundation in full-stack web development and 5+ years of experience building production-ready applications. I combine hands-on expertise in React, Vue, Next.js, Java Spring Boot, and modern delivery practices with focused training in LLMs, agentic workflows, RAG, secure AI applications, real-time communication, data pipelines, and AI engineering project delivery. My background bridges product-oriented software engineering and applied AI, allowing me to design and ship intelligent systems that are practical, scalable, and aligned with business goals.
             </p>
           </Reveal>
           <Reveal>
             <p className="leading-relaxed text-zinc-300">
-              I currently work as Freelance Developer. At the moment enjoying
-              by making very cool designs and building them into real products.
+              I currently work as Freelance Developer. At the moment I&apos;m
+              focusing on turning AI ideas into real products, from designing a
+              clean UX to shipping the full stack behind it.
             </p>
           </Reveal>
           <Reveal>
@@ -35,7 +35,8 @@ export const About = () => {
           <Reveal>
             <p className="leading-relaxed text-zinc-300">
               I&apos;m actively looking for new positions where I can merge my
-              love for code with my passion for cool designs.
+              love for AI with my passion for building great fullstack
+              experiences.
             </p>
           </Reveal>
           <Reveal>

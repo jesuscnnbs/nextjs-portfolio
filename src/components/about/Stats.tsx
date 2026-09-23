@@ -12,23 +12,21 @@ export const Stats = () => {
             <span className="font-bold ml-2">Use at work</span>
           </h4>
           <div className="flex flex-wrap gap-2 mb-12">
-            <Chip>JavaScript</Chip>
             <Chip>TypeScript</Chip>
-            <Chip>HTML</Chip>
-            <Chip>CSS</Chip>
+            <Chip>Next.js</Chip>
             <Chip>React</Chip>
-            <Chip>Vue</Chip>
-            <Chip>Redux</Chip>
-            <Chip>Zustand</Chip>
+            <Chip>Python</Chip>
+            <Chip>LLMs</Chip>
+            <Chip>LangChain</Chip>
+            <Chip>RAG</Chip>
+            <Chip>OpenAI API</Chip>
+            <Chip>Vector DBs</Chip>
+            <Chip>Prompt Engineering</Chip>
             <Chip>NodeJS</Chip>
-            <Chip>SQL</Chip>
-            <Chip>GitHub</Chip>
-            <Chip>Jira</Chip>
+            <Chip>PostgreSQL</Chip>
+            <Chip>Tailwind</Chip>
             <Chip>AWS</Chip>
             <Chip>Docker</Chip>
-            <Chip>Java</Chip>
-            <Chip>Spring</Chip>
-            <Chip>Tailwind</Chip>
           </div>
         </div>
       </Reveal>
@@ -39,15 +37,16 @@ export const Stats = () => {
             <span className="font-bold ml-2">Use for fun</span>
           </h4>
           <div className="flex flex-wrap gap-2 mb-12">
-            <Chip>NextJS</Chip>
-            <Chip>Tailwind</Chip>
+            <Chip>Agents</Chip>
+            <Chip>Pinecone</Chip>
+            <Chip>Hugging Face</Chip>
             <Chip>Figma</Chip>
-            <Chip>GraphQL</Chip>
-            <Chip>Python</Chip>
+            <Chip>Supabase</Chip>
             <Chip>Express</Chip>
             <Chip>Postgres</Chip>
             <Chip>MongoDB</Chip>
-            <Chip>Heroku</Chip>
+            <Chip>GraphQL</Chip>
+            <Chip>Vercel</Chip>
           </div>
         </div>
       </Reveal>

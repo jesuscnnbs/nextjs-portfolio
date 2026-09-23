@@ -9,8 +9,13 @@ const Hero = () => {
         <div className="pointer-events-none relative z-10 mx-auto max-w-5xl px-4 md:px-8">
           <Reveal>
             <h1 className="inline bg-gradient-to-r from-primary-light to-secondary bg-clip-text pointer-events-auto text-4xl sm:text-6xl font-black text-transparent md:text-8xl">
-              Web{" "}Developer<span className="text-xl sm:text-4xl">◆</span>
+              AI FullStack{" "}Developer<span className="text-xl sm:text-4xl">◆</span>
             </h1>
+          </Reveal>
+          <Reveal>
+            <div className="pointer-events-auto mt-4 text-primary-light text-sm sm:text-lg uppercase tracking-widest">
+              AI Engineer&nbsp;|&nbsp;Agentic Workflows, RAG &amp; Secure AI Applications
+            </div>
           </Reveal>
           <Reveal>
             <div className="pointer-events-none my-4">
@@ -24,8 +29,9 @@ const Hero = () => {
           </Reveal>
           <Reveal>
             <p className="pointer-events-auto leading-relaxed md:leading-relaxed max-w-xl text-sm text-zinc-300 md:text-base">
-              I'm a software developer with a passion for building web
-              applications. I'm currently working as a software developer as
+              I'm a fullstack developer passionate about building AI-powered web
+              applications, from LLM features and RAG pipelines to polished
+              frontends. I'm currently working as a software developer as
               <span className="font-semibold text-secondary-light">
                 {" "}
                 @Freelancer
